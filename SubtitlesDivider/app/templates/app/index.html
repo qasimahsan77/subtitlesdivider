@@ -1,0 +1,49 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Django - Multiple Files Upload</title>
+    </head>
+    <body>
+		<div style="width: 500px; margin: auto;">
+			<fieldset name="Multiple Files Upload">
+				<form method="post" action="/" enctype="multipart/form-data" class="form-inline">
+					{% csrf_token %}
+					<dl class="col-md-12" style="margin-top:3em;">
+                        <dt class="col-md-5">
+                            <label>Select Master Files</label>&nbsp;&nbsp;
+							<input type="file" name="files" autocomplete="off" required multiple>
+                        </dt>
+                        <dt class="col-md-5">
+                            <label>Select Short Files</label>&nbsp;&nbsp;
+							<input type="file" name="shortfiles" class="btn-file" autocomplete="off" required multiple>
+                        </dt>
+                        <dt class="col-md-2">
+                            <span>
+						<input type="submit" value="Upload" class="btn btn-success"></span>
+                        </dt>
+					</dl>
+				</form>
+                <br />
+                <dl class="col-md-12">
+                    <dt class="col-md-12">
+                        {% if msg %} 
+                        {% autoescape off %} 
+                        <span class="col-md-6">
+                            {{ msg }} 
+                        </span>
+                        <span class="col-md-3 col-md-offset-2">
+                            <a href="{% url 'download_zip' %}" download target="_blank" >Download File</a>
+                        </span>
+                        {% endautoescape %} 
+                        {% endif %}
+                    </dt>
+                </dl>
+			</fieldset>
+		</div>
+    </body>
+</html>
+{% endblock %}
